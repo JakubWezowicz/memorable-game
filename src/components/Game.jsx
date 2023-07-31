@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./Game.css";
 import Card from "./Card";
 import Info from "./Info";
+import Modal from "./Modal";
 const images = [
   { src: "image1.png" },
   { src: "image2.png" },
@@ -18,13 +19,16 @@ const Game = () => {
   const [secondChoice, setSecondChoice] = useState(null);
   const [disabled, setDisabled] = useState(true);
   const [disabledCards, setDisabledCards] = useState(false);
+  const [win, setWin] = useState(false);
   const shuffle = () => {
     setDisabled(false);
     const shuffleCards = [...images, ...images]
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random(), selected: false }));
     setCards(shuffleCards);
+    // console.log(shuffleCards);
     setTurns(0);
+    setWin(false);
   };
   const selectImage = (selectedCard) => {
     !firstChoice
@@ -37,9 +41,7 @@ const Game = () => {
           src: selectedCard.src,
         });
   };
-  useEffect(() => {
-    // console.log(cards);
-    // console.log(firstChoice, secondChoice);
+  const setNewCards = useCallback(() => {
     if (firstChoice && secondChoice) {
       setDisabledCards(true);
       setTimeout(() => {
@@ -47,18 +49,29 @@ const Game = () => {
         setSecondChoice(null);
         setDisabledCards(false);
       }, 500);
-      const newCards = cards.map((card) => {
-        if (card.src === firstChoice.src && card.src === secondChoice.src) {
-          return { ...card, selected: true };
-        } else {
-          return card;
-        }
+      setCards((cards) => {
+        return cards.map((card) => {
+          if (card.src === firstChoice.src && card.src === secondChoice.src) {
+            return { ...card, selected: true };
+          } else {
+            return card;
+          }
+        });
       });
-      setCards(newCards);
-
       setTurns((num) => num + 1);
     }
   }, [firstChoice, secondChoice]);
+  useEffect(() => {
+    setNewCards();
+  }, [setNewCards]);
+  useEffect(() => {
+    if (cards.length > 0) {
+      const selectedCards = cards.filter((card) => card.selected);
+      if (selectedCards.length === cards.length) {
+        setWin(true);
+      }
+    }
+  }, [cards]);
   return (
     <div className="game">
       {!disabled && (
@@ -66,6 +79,7 @@ const Game = () => {
           {cards.map((card) => (
             <Card
               card={card}
+              key={card.id}
               firstChoice={firstChoice}
               secondChoice={secondChoice}
               selectImage={selectImage}
@@ -75,6 +89,7 @@ const Game = () => {
         </div>
       )}
       <Info disabled={disabled} turns={turns} shuffle={shuffle} />
+      {win && <Modal shuffle={shuffle} turns={turns} />}
     </div>
   );
 };

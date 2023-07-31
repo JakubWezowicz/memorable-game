@@ -15,12 +15,12 @@ const Card = ({
       secondChoice?.id === card.id ||
       card.selected ? (
         <>
-          <img src={card.src} key={card.id} id={card.id} />
+          <img src={card.src} alt="uncoverd card image" />
         </>
       ) : (
         <img
           src={coverImage.src}
-          alt="cover image"
+          alt="coverd card image"
           key={card.id}
           id={card.id}
           onClick={

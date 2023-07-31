@@ -4,7 +4,7 @@ const Info = ({ disabled, turns, shuffle }) => {
       {!disabled ? (
         <div className="info enabledGame">
           {!disabled && <p>RUNDA: {turns}</p>}
-          <button onClick={shuffle}>New game</button>
+          <button onClick={shuffle}>Reset game</button>
         </div>
       ) : (
         <div className="info disabledGame">
