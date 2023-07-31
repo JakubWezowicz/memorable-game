@@ -1,0 +1,46 @@
+img {
+  width: 180px;
+  border-radius: 50px;
+  margin: 10px 20px;
+}
+.game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.board {
+  padding: 50px;
+  background-color: #4c6699;
+  width: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.game button {
+  color: white;
+  padding: 20px;
+  background-color: #262b36;
+  border-radius: 10px;
+  border: none;
+  width: 100px;
+}
+
+.info {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.disabledButton {
+  position: absolute;
+  top: 50%;
+}
+
+.enabledGame {
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  background-color: #3c5994;
+  margin-left: 5%;
+}
