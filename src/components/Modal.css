@@ -1,0 +1,13 @@
+.modal {
+  color: white;
+  left: auto;
+  position: absolute;
+  height: 50%;
+  width: 50%;
+  background-color: #262b36;
+  border-radius: 30px;
+}
+
+.modal button {
+  background-color: #5c73a0;
+}
