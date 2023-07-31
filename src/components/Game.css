@@ -2,12 +2,14 @@ img {
   width: 180px;
   border-radius: 50px;
   margin: 10px 20px;
+  cursor: pointer;
 }
 .game {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 .board {
   padding: 50px;
@@ -15,6 +17,7 @@ img {
   width: 50%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  border-radius: 10px;
 }
 
 .game button {
@@ -24,6 +27,7 @@ img {
   border-radius: 10px;
   border: none;
   width: 100px;
+  cursor: pointer;
 }
 
 .info {
