@@ -1,6 +1,11 @@
 .App {
   text-align: center;
   height: 100vh;
+  background-image: url("./assets/background-image.min.svg");
+  background-color: #293854;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .App-logo {

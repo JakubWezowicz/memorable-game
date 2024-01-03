@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Game.css";
 import Card from "./Card";
 import Info from "./Info";
 import Modal from "./Modal";
+
 const images = [
   { src: "image1.png" },
   { src: "image2.png" },
@@ -24,9 +25,10 @@ const Game = () => {
     setDisabled(false);
     const shuffleCards = [...images, ...images]
       .sort(() => Math.random() - 0.5)
-      .map((card) => ({ ...card, id: Math.random(), selected: false }));
+      .map((card) => {
+        return { ...card, id: Math.random(), selected: false };
+      });
     setCards(shuffleCards);
-    // console.log(shuffleCards);
     setTurns(0);
     setWin(false);
   };
@@ -41,7 +43,8 @@ const Game = () => {
           src: selectedCard.src,
         });
   };
-  const setNewCards = useCallback(() => {
+
+  useEffect(() => {
     if (firstChoice && secondChoice) {
       setDisabledCards(true);
       setTimeout(() => {
@@ -61,9 +64,6 @@ const Game = () => {
       setTurns((num) => num + 1);
     }
   }, [firstChoice, secondChoice]);
-  useEffect(() => {
-    setNewCards();
-  }, [setNewCards]);
   useEffect(() => {
     if (cards.length > 0) {
       const selectedCards = cards.filter((card) => card.selected);
